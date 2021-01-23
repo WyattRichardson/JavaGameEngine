@@ -1,19 +1,20 @@
 package core.rendering;
 
-import core.gameobjects.*;
+import core.gameobjects.entity.Entity;
+import core.gameobjects.model.Model;
 import core.rendering.shaders.ModelShader;
 import core.utils.KeyInput;
 import core.utils.Math;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
 import static org.lwjgl.opengl.GL30.*;
 public class EntityRenderer{
 
-		public static HashMap<Model, ArrayList<Entity>> entities;
+		public HashMap<Model, ArrayList<Entity>> entities;
 		
 		private ModelShader modelShader;
 		
@@ -35,17 +36,20 @@ public class EntityRenderer{
 				glEnableVertexAttribArray(0);				
 				glEnableVertexAttribArray(1);
 				glEnableVertexAttribArray(2);
-				
-				for(Entity e: entities.get(model)) {
+
+				ArrayList<Entity> batch = entities.get(model);
+				int batchSize = batch.size();
+				for(int i = 0; i < batchSize; i++) {
+					Entity entity = batch.get(i);
 					
-					updateEntity(e);
-					
-					float[] modelTransformMat = new float[16];
-					Math.createTransformationMatrix(e.getPosition(), e.getRotation(), e.getScale()).get(modelTransformMat);
-					glUniformMatrix4fv(modelShader.uniformLocations.get("transformationMatrix"), false, modelTransformMat);
-					
-					glDrawElements(model.getFaceType(), model.getIndicyCount(), GL_UNSIGNED_INT, 0);
-				
+					if(isInFOV(entity.getPosition())) {
+						if(entity.controller != null) {
+							entity = entity.controller.run(entity, dt);
+						}
+						prepareEntity(entity);
+						//If controller is not working correctly then: batch.get(i) = entity;
+						glDrawElements(model.getFaceType(), model.getIndicyCount(), GL_UNSIGNED_INT, 0);
+					}
 				
 				}
 				glDisableVertexAttribArray(0);
@@ -60,31 +64,21 @@ public class EntityRenderer{
 		
 		}
 		
-		public void updateEntity(Entity e) {
-			if(KeyInput.isKeyDown(GLFW.GLFW_KEY_RIGHT)) {
-				e.setRotation(e.getRotation().x + (6f), e.getRotation().y, e.getRotation().z);
-			}
-			if(KeyInput.isKeyDown(GLFW.GLFW_KEY_LEFT)) {
-				e.setPosition(e.getPosition().x - (0.1f), e.getPosition().y, e.getPosition().z);
-			}
-			if(KeyInput.isKeyDown(GLFW.GLFW_KEY_UP)) {
-				e.setPosition(e.getPosition().x, e.getPosition().y + (0.1f), e.getPosition().z);
-			}
-			if(KeyInput.isKeyDown(GLFW.GLFW_KEY_DOWN)) {
-				e.setPosition(e.getPosition().x, e.getPosition().y - (0.1f), e.getPosition().z);
-			}
+		public void prepareEntity(Entity entity) {
+			float[] modelTransformMat = new float[16];
+			Math.createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale()).get(modelTransformMat);
+			glUniformMatrix4fv(modelShader.uniformLocations.get("transformationMatrix"), false, modelTransformMat);
 		}
 		
+		public boolean isInFOV(Vector3f position) {
+			return true; //TODO: implement
+		}
 		public void addEntity(Entity entity) {
-			
-			Model entityModel = entity.getModel();
-			
-			if(!entities.containsKey(entityModel)) {
-				entities.put(entityModel, new ArrayList<Entity>());
+			Model model = entity.getModel();
+			if(!entities.containsKey(model)) {
+				entities.put(model, new ArrayList<Entity>());
 			}
-			
-			entities.get(entityModel).add(entity);
-
+			entities.get(model).add(entity);
 		}
 		
 		public void cleanUp() {

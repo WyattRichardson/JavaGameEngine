@@ -1,9 +1,9 @@
-package core.gameobjects;
+package core.gameobjects.entity;
 
 
 import org.joml.Vector3f;
 
-public class Transform {
+public class Transform extends EntityComponent{
 	
 	public Vector3f position;
 	public Vector3f rotation;

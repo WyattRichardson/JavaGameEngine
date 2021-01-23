@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL;
 
 import static org.lwjgl.glfw.Callbacks.*;
 
-import core.gameobjects.*;
+import core.gameobjects.entity.Entity;
 import core.rendering.*;
 import core.utils.KeyInput;
 
@@ -61,13 +61,13 @@ public final class Sandbox { //TODO: Implement transformation matrix, delta time
 		float dt = 0;
 		while(!glfwWindowShouldClose(windowID)) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			dt = (float)(System.currentTimeMillis() - lastTime);//(delta time in seconds)
+			dt = (float)(System.currentTimeMillis() - lastTime) / 1000f;//(delta time in seconds)
 			glfwPollEvents();
 			
 			entityRenderer.render(dt);
 			
-			glfwSwapBuffers(windowID);
 			lastTime = System.currentTimeMillis();
+			glfwSwapBuffers(windowID);
 		}
 	}
 	

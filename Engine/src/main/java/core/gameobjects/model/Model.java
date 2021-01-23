@@ -1,12 +1,13 @@
-package core.gameobjects;
+package core.gameobjects.model;
 
 import static org.lwjgl.opengl.GL30.*;
 
 import java.io.FileNotFoundException;
 
+import core.gameobjects.entity.EntityComponent;
 import core.utils.OBJLoader;
 
-public class Model {
+public class Model extends EntityComponent{
 	
 	private int vaoID;
 	

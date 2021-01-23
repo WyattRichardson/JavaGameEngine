@@ -1,4 +1,4 @@
-package core.gameobjects;
+package core.gameobjects.terrain;
 
 public class Terrain {
 
