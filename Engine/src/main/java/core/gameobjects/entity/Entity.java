@@ -15,15 +15,16 @@ public class Entity {
 	public Transform transform;
 	public Model model;
 	public ArrayList<EntityComponent> components;
-	public EntityController controller = null;
 	public String id;
+	public boolean hasController = false;
 	
-	public Entity(String id, Model model) {
-		this.model = model;
+	public Entity(String id) {
 		this.id = id;
 		transform = new Transform(0,0,-1,0,0,0,1);
 		components = new ArrayList<EntityComponent>();
 	}
+	
+	public void tick(float dt) {}
 	
 	//TODO: setter methods for all components, maybe getters
 	
@@ -33,9 +34,7 @@ public class Entity {
 	public void setModel(Model m) {
 		this.model = m;
 	}
-	public void setController(EntityController controller) {
-		this.controller = controller;
-	}
+	
 	public void setPosition(float x, float y, float z) {
 		transform.position.x = x;
 		transform.position.y = y;

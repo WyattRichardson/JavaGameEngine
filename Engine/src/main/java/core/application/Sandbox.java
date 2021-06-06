@@ -43,7 +43,7 @@ public final class Sandbox { //TODO: Implement transformation matrix, delta time
 		System.out.println();
 		GL.createCapabilities();
 		glClearColor(clearColor[0], clearColor[1], clearColor[2], clearColor[3]);
-		this.entityRenderer = new EntityRenderer();
+		entityRenderer = new EntityRenderer();
 	}
 	
 	public void init() {
@@ -59,6 +59,9 @@ public final class Sandbox { //TODO: Implement transformation matrix, delta time
 	public void run() {
 		long lastTime = System.currentTimeMillis();
 		float dt = 0;
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
+		glEnable(GL_DEPTH_TEST);
 		while(!glfwWindowShouldClose(windowID)) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			dt = (float)(System.currentTimeMillis() - lastTime) / 1000f;//(delta time in seconds)

@@ -43,8 +43,8 @@ public class EntityRenderer{
 					Entity entity = batch.get(i);
 					
 					if(isInFOV(entity.getPosition())) {
-						if(entity.controller != null) {
-							entity = entity.controller.run(entity, dt);
+						if(entity.hasController) {
+							entity.tick(dt);
 						}
 						prepareEntity(entity);
 						//If controller is not working correctly then: batch.get(i) = entity;

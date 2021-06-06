@@ -1,11 +1,12 @@
 package core.gameobjects.entity;
 
-public abstract class EntityController {
+public interface EntityController {
 
-	public EntityController() {
-		// TODO Auto-generated constructor stub
-	}
 	
-	public abstract Entity run(Entity entit, float dt);
-
+	public void tick(float dt);
+	
+	public void updateTransform(float dt);
+	
+	
 }
+				

@@ -19,11 +19,12 @@ public class Main {
 		
 		Sandbox sandbox = new Sandbox(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, CLEAR_COLOR);
 		Model squareModel = new Model("Square.obj", GL_TRIANGLES);
-		Entity square_1 = new Entity("square_1", squareModel);
-		square_1.setModel(squareModel);
-		square_1.setPosition(0, 0, -10);
-		square_1.setController(new Player());
-		sandbox.addEntity(square_1);
+		Model mando = new Model("Mandalorian.obj", GL_TRIANGLES);
+		Player player_1 = new Player("player_1");
+		player_1.hasController = true;
+		player_1.setModel(mando);
+		player_1.setPosition(0, 0, -100);
+		sandbox.addEntity(player_1);
 		sandbox.init(); 
 		
 	}
