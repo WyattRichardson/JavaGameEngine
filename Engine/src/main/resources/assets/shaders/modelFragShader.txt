@@ -4,6 +4,6 @@ in vec3 interpNormal;
 in vec3 toLightVector;
 
 void main(){
-	float brightness = maSx(0.0, dot(normalize(toLightVector), normalize(interpNormal)));
+	float brightness = max(0.0, dot(normalize(toLightVector), normalize(interpNormal)));
 	gl_FragColor = vec4(0.5,0.5,0.5, 1.0) * brightness;
 }

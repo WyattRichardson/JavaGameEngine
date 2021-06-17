@@ -1,6 +1,7 @@
 package core.rendering;
 
 import core.gameobjects.entity.Entity;
+import core.gameobjects.entity.EntityComponent;
 import core.gameobjects.lighting.Light;
 import core.gameobjects.model.Model;
 import core.rendering.shaders.ModelShader;
@@ -8,6 +9,7 @@ import core.utils.KeyInput;
 import core.utils.Math;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
@@ -119,7 +121,8 @@ public class EntityRenderer {
 	}
 
 	public void prepareLightEntity(Entity entity) {
-		Light light = (Light) entity.components.get(0);
+		Light light = (Light) entity.getComponentsByType(EntityComponent.TYPE_LIGHT).get(0);
+		//TODO create for loop that loops through the list and updates uniforms respectively.
 		glUniform3f(modelShader.uniformLocations.get("lightPosition"), light.getPosition().x, light.getPosition().y, light.getPosition().z);
 		
 	}
@@ -136,7 +139,7 @@ public class EntityRenderer {
 	}
 
 	public void addEntity(Entity entity) {
-		Model model = entity.getModel();
+		Model model = (Model) entity.getComponentsByType(EntityComponent.TYPE_MODEL).get(0);
 		if (!entities.containsKey(model)) {
 			entities.put(model, new ArrayList<Entity>());
 		}
@@ -145,7 +148,11 @@ public class EntityRenderer {
 
 	public void addLightEntity(Entity entity) {
 
-		Model model = entity.getModel();
+		List<EntityComponent> models = entity.getComponentsByType(EntityComponent.TYPE_MODEL);
+		Model model = null;
+		if(models.size() != 0) {
+			model = (Model) models.get(0);
+		}
 		if (model != null && !lightEntities.containsKey(model)) {
 			lightEntities.put(model, new ArrayList<Entity>());
 		}

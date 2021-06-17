@@ -1,8 +1,10 @@
 package core.gameobjects.entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.joml.Vector3f;
+
 
 import core.gameobjects.model.Model;
 import core.gameobjects.textures.ModelTexture;
@@ -13,7 +15,6 @@ public class Entity {
 	
 	
 	public Transform transform;
-	public Model model;
 	public ArrayList<EntityComponent> components;
 	public String id;
 	public boolean hasController = false;
@@ -26,13 +27,15 @@ public class Entity {
 	
 	public void tick(float dt) {}
 	
-	//TODO: setter methods for all components, maybe getters
 	
-	public Model getModel() {
-		return model;
-	}
-	public void setModel(Model m) {
-		this.model = m;
+	public List<EntityComponent> getComponentsByType(int type) {
+		List<EntityComponent> components = new ArrayList<EntityComponent>();
+		for(EntityComponent component: this.components) {
+			if(component.type == type) {
+				components.add(component);
+			}
+		}
+		return components;
 	}
 	
 	public void setPosition(float x, float y, float z) {

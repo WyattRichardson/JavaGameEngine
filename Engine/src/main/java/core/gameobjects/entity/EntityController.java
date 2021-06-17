@@ -8,5 +8,6 @@ public interface EntityController {
 	public void updateTransform(float dt);
 	
 	
+	
 }
 				

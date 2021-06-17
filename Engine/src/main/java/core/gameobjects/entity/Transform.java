@@ -10,9 +10,16 @@ public class Transform extends EntityComponent{
 	public float scale;
 	
 	public Transform(float x, float y, float z, float rx, float ry, float rz, float scale) {
+		super();
 		position = new Vector3f(x, y, z);
 		rotation = new Vector3f(rx, ry, rz);
 		this.scale = scale;
 	}
-	public Transform() {};
+	public Transform() {
+		super();
+	}
+	@Override
+	public void setType() {
+		type = EntityComponent.TYPE_TRANSFORM;
+	};
 }

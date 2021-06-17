@@ -16,10 +16,11 @@ public class Model extends EntityComponent{
 	private int indicyCount;
 		
 	public Model() {
-		
+		super();
 	}
 	
 	public Model(String fName, int faceType){
+		super();
 		this.faceType = faceType;
 		vaoID = glGenVertexArrays();
 		try {
@@ -65,6 +66,11 @@ public class Model extends EntityComponent{
 	
 	public int getVAO() {
 		return this.vaoID;
+	}
+
+	@Override
+	public void setType() {
+		type = EntityComponent.TYPE_MODEL;
 	}
 
 	

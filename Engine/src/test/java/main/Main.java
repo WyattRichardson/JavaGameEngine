@@ -5,6 +5,7 @@ import org.joml.Vector3f;
 
 import core.application.Sandbox;
 import core.gameobjects.entity.Entity;
+import core.gameobjects.entity.EntityComponent;
 import core.gameobjects.lighting.Light;
 import core.gameobjects.model.Model;
 
@@ -23,15 +24,18 @@ public class Main {
 		Sandbox sandbox = new Sandbox(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, CLEAR_COLOR);
 		Model squareModel = new Model("Square.obj", GL_TRIANGLES);
 		Model mando = new Model("Mandalorian.obj", GL_TRIANGLES);
+		Light sunLight = new Light(new Vector3f(0,200,0), new Vector3f(0,0,0), new Vector3f(1,1,1));
 		
 		Player player_1 = new Player("player_1");
-		player_1.hasController = true;
-		player_1.setModel(mando);
+		player_1.addComponent(mando);
 		player_1.setPosition(0, 0, -100);
+		player_1.hasController = true;
 		sandbox.addEntity(player_1);
 		
-		Entity sun = new Entity("Sun_Light");
-		sun.addComponent(new Light(new Vector3f(0,200,0), new Vector3f(0,0,0), new Vector3f(1,1,1)));
+		
+		MovingLight sun = new MovingLight("Sun_Light");
+		sun.addComponent(sunLight);
+		sun.hasController = true;
 		sandbox.addLightEntity(sun);
 		
 		sandbox.init(); 

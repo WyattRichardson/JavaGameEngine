@@ -22,7 +22,7 @@ public class Player extends Entity implements EntityController{
 	}
 	
 	public void updateTransform(float dt) {
-		if(KeyInput.isKeyDown(GLFW_KEY_W)){
+		/*if(KeyInput.isKeyDown(GLFW_KEY_W)){
 			transform.position.y += (speed * dt);
 		}
 		if(KeyInput.isKeyDown(GLFW_KEY_S)){
@@ -33,7 +33,7 @@ public class Player extends Entity implements EntityController{
 		}
 		if(KeyInput.isKeyDown(GLFW_KEY_D)){
 			transform.position.x += (speed * dt);
-		}
+		}*/
 		if(KeyInput.isKeyDown(GLFW_KEY_LEFT)){
 			transform.rotation.y -= (turnSpeed * dt);
 		}
@@ -47,6 +47,8 @@ public class Player extends Entity implements EntityController{
 			transform.rotation.x += (turnSpeed * dt);
 		}
 	}
+
+
 	
 	
 

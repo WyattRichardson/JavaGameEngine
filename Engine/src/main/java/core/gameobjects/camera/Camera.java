@@ -21,4 +21,9 @@ public class Camera extends EntityComponent{
 		return transform.rotation;
 	}
 
+	@Override
+	public void setType() {
+		type = EntityComponent.TYPE_CAMERA;
+	}
+
 }
