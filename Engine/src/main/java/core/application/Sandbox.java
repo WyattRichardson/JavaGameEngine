@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL;
 import static org.lwjgl.glfw.Callbacks.*;
 
 import core.gameobjects.entity.Entity;
+import core.gameobjects.lighting.Light;
 import core.rendering.*;
 import core.utils.KeyInput;
 
@@ -77,6 +78,9 @@ public final class Sandbox { //TODO: Implement transformation matrix, delta time
 	
 	public void addEntity(Entity entity) {
 		entityRenderer.addEntity(entity);
+	}
+	public void addLightEntity(Entity entity) {
+		entityRenderer.addLightEntity(entity);
 	}
 	
 	public void cleanUp() {

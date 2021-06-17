@@ -14,4 +14,5 @@ public class Transform extends EntityComponent{
 		rotation = new Vector3f(rx, ry, rz);
 		this.scale = scale;
 	}
+	public Transform() {};
 }

@@ -40,6 +40,9 @@ public class ModelShader extends ShaderProgram {
 		glUniformMatrix4fv(uniformLocations.get("projectionMatrix"), false, projectionMat);
 		
 		uniformLocations.put("transformationMatrix", glGetUniformLocation(this.programID, "transformationMatrix"));
+		
+		uniformLocations.put("lightPosition", glGetUniformLocation(this.programID, "lightPosition"));
+		
 	}
 	
 

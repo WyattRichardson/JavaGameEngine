@@ -1,8 +1,9 @@
 #version 330 core 
-in vec2 interpTC;
-in vec3 interpN;
+in vec2 interpTexCoords;
+in vec3 interpNormal;
+in vec3 toLightVector;
 
 void main(){
-	
-	gl_FragColor = vec4(interpN, 1.0);
+	float brightness = maSx(0.0, dot(normalize(toLightVector), normalize(interpNormal)));
+	gl_FragColor = vec4(0.5,0.5,0.5, 1.0) * brightness;
 }

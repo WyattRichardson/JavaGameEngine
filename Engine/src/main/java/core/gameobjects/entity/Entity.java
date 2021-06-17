@@ -58,5 +58,8 @@ public class Entity {
 	public float getScale() {
 		return this.transform.scale;
 	}
+	public void addComponent(EntityComponent component) {
+		components.add(component);
+	}
 	
 }

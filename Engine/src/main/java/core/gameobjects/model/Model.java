@@ -15,6 +15,10 @@ public class Model extends EntityComponent{
 	
 	private int indicyCount;
 		
+	public Model() {
+		
+	}
+	
 	public Model(String fName, int faceType){
 		this.faceType = faceType;
 		vaoID = glGenVertexArrays();

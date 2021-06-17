@@ -1,8 +1,11 @@
 package main;
 import static org.lwjgl.opengl.GL30.*;
 
+import org.joml.Vector3f;
+
 import core.application.Sandbox;
 import core.gameobjects.entity.Entity;
+import core.gameobjects.lighting.Light;
 import core.gameobjects.model.Model;
 
 public class Main {
@@ -20,11 +23,17 @@ public class Main {
 		Sandbox sandbox = new Sandbox(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, CLEAR_COLOR);
 		Model squareModel = new Model("Square.obj", GL_TRIANGLES);
 		Model mando = new Model("Mandalorian.obj", GL_TRIANGLES);
+		
 		Player player_1 = new Player("player_1");
 		player_1.hasController = true;
 		player_1.setModel(mando);
 		player_1.setPosition(0, 0, -100);
 		sandbox.addEntity(player_1);
+		
+		Entity sun = new Entity("Sun_Light");
+		sun.addComponent(new Light(new Vector3f(0,200,0), new Vector3f(0,0,0), new Vector3f(1,1,1)));
+		sandbox.addLightEntity(sun);
+		
 		sandbox.init(); 
 		
 	}
